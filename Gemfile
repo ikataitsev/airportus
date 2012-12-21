@@ -25,3 +25,5 @@ gem 'jquery-rails'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
+
+gem 'awesome_print', group: :development
