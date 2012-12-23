@@ -39,7 +39,7 @@ class Airport < ActiveRecord::Base
   end
 
   def kupibilet_url
-    "http://www.kupibilet.ru/#SY100#{Time.now.tomorrow.strftime("%d%^b")}LED#{self.iata_code}"
+    "http://www.kupibilet.ru/#SY100#{Time.zone.now.tomorrow.strftime("%d%^b")}LED#{self.iata_code}"
   end
 
   def image_url
