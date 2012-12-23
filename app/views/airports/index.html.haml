@@ -4,35 +4,35 @@
 
 - content_for :scripts do
   = javascript_include_tag "http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU"
-  
+
   :javascript
     var airports = [];
 
   - @airports.each do |airport|
-    = javascript_tag "airports.push(jQuery.parseJSON('#{airport.to_json}'));" 
-    
+    = javascript_tag "airports.push(jQuery.parseJSON('#{airport.to_json}'));"
+
   :javascript
     var myMap;
     var center_coordinates = [56.416667, 94.25];
-    
+
     ymaps.ready(init);
-    
-    function init() {     
+
+    function init() {
       myMap = new ymaps.Map ("map", {
         center: center_coordinates,
         zoom: 3,
-        type: 'yandex#satellite'
+        type: 'yandex#hybrid'
       })
-      
+
       add_airports(airports);
     };
-            
+
     function add_airports(airports) {
       for (var i = 0; i < airports.length; i++) {
         add_airport(airports[i]);
       }
     };
-      
+
     function add_airport(airport) {
       var coordinates = [airport.latitude_deg, airport.longitude_deg];
       var placemark = new ymaps.Placemark(coordinates, {
@@ -44,5 +44,5 @@
           preset: "twirl#airplaneIcon"
       });
       myMap.geoObjects.add(placemark);
-    };    
-    
+    };
+
