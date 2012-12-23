@@ -24,14 +24,14 @@ class CreateAirports < ActiveRecord::Migration
       t.string :local_code
       t.string :home_link, limit: 1000
       t.string :wikipedia_link, limit: 1000
-      t.string :keywords
-      
+      t.text :keywords
+
       t.timestamps
     end
-    
+
     add_index :airports, :external_id
     add_index :airports, :ident
-    
+
     # Populate!
     puts 'Populating airports table. Hold on...'
     path_to_airports = Rails.root.join('lib', 'data', 'airports.csv')
@@ -41,7 +41,7 @@ class CreateAirports < ActiveRecord::Migration
       attrs.delete 'id'
       attrs['external_type'] = attrs['type']
       attrs.delete 'type'
-      
+
       Airport.create! attrs
     end
   end
