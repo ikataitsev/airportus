@@ -1,0 +1,27 @@
+// Place all the styles related to the airports controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: 'Lobster', cursive;
+}
+
+#container {
+  max-width:900px;
+  margin:0 auto;
+  padding: 0 auto;
+}
+
+.ymaps-map {
+  border: 2px solid;
+  border-radius: 12px;
+}
+
+#map {
+  width: 900px;
+  height: 500px;
+}
+
+.ymaps-b-balloon__content-body {
+  text-align: center;
+}
