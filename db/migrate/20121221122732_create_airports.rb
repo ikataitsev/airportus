@@ -10,20 +10,20 @@ class CreateAirports < ActiveRecord::Migration
       t.integer :external_id
       t.string :ident
       t.string :external_type
-      t.string :name
+      t.string :name, limit: 1000
       t.decimal :latitude_deg,  :precision => 18, :scale => 15
       t.decimal :longitude_deg, :precision => 18, :scale => 15
       t.integer :elevation_ft
       t.string :continent
       t.string :iso_country
       t.string :iso_region
-      t.string :municipality
-      t.string :scheduled_service
+      t.string :municipality, limit: 1000
+      t.string :scheduled_service, limit: 1000
       t.string :gps_code
       t.string :iata_code
       t.string :local_code
-      t.string :home_link
-      t.string :wikipedia_link
+      t.string :home_link, limit: 1000
+      t.string :wikipedia_link, limit: 1000
       t.string :keywords
       
       t.timestamps

@@ -9,7 +9,7 @@ class Airport < ActiveRecord::Base
   serialize :keywords
 
   scope :with_municipality, where('municipality is not null')
-  scope :open, with_municipality.where("external_type IS NOT 'closed'")
+  scope :open, with_municipality.where("external_type != ?", 'closed')
   scope :iata, open.where('iata_code IS NOT NULL')
 
   scope :small,  iata.where(external_type: 'small_airport')
