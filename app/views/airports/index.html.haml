@@ -1,47 +1,48 @@
-= content_tag 'div', id: 'airports', data: { airports: @airports } do
-  %h1 Аэропорты России
-  #map
-  
+%h1 Аэропорты России
+
+#map
+
 - content_for :scripts do
   = javascript_include_tag "http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU"
 
   :javascript
-    $(function() {
-      var airports = $('#airports').data('airports');
-      
-      var myMap;
-      var center_coordinates = [66.41, 95.25];
+    var airports = [];
 
-      ymaps.ready(init);
+  - @airports.each do |airport|
+    = javascript_tag "airports.push(jQuery.parseJSON('#{airport.to_json}'));"
 
-      function init() {
-        myMap = new ymaps.Map ("map", {
-          center: center_coordinates,
-          zoom: 3,
-          type: 'yandex#hybrid'
-        })
+  :javascript
+    var myMap;
+    var center_coordinates = [56.416667, 94.25];
 
-        add_airports(airports);
-      };
+    ymaps.ready(init);
 
-      function add_airports(airports) {
-        for (var i = 0; i < airports.length; i++) {
-          add_airport(airports[i]);
-        }
-      };
+    function init() {
+      myMap = new ymaps.Map ("map", {
+        center: center_coordinates,
+        zoom: 3,
+        type: 'yandex#hybrid'
+      })
 
-      function add_airport(airport) {
-        var coordinates = [airport.latitude_deg, airport.longitude_deg];
-        var placemark = new ymaps.Placemark(coordinates, {
-          name: airport.name,
-          balloonContentHeader: "✈ " + airport.name + " (" + airport.municipality + ")",
-          balloonContentBody: '<img src=http://f.cl.ly/items/3J0l0b3v160K3z2r0o2f/default_airport.png>',
-          balloonContentFooter: "Купить билет сюда на завтра!".link(airport.kupibilet_url)
-        }, {
-            preset: "twirl#airplaneIcon"
-        });
-        myMap.geoObjects.add(placemark);
-      };
-    
-    });
+      add_airports(airports);
+    };
+
+    function add_airports(airports) {
+      for (var i = 0; i < airports.length; i++) {
+        add_airport(airports[i]);
+      }
+    };
+
+    function add_airport(airport) {
+      var coordinates = [airport.latitude_deg, airport.longitude_deg];
+      var placemark = new ymaps.Placemark(coordinates, {
+        name: airport.name,
+        balloonContentHeader: "✈ " + airport.name + " (" + airport.municipality + ")",
+        balloonContentBody: '<img src=http://f.cl.ly/items/3J0l0b3v160K3z2r0o2f/default_airport.png>',
+        balloonContentFooter: "Купить билет сюда на завтра!".link(airport.kupibilet_url)
+      }, {
+          preset: "twirl#airplaneIcon"
+      });
+      myMap.geoObjects.add(placemark);
+    };
 
