@@ -23,10 +23,12 @@ gem 'jquery-rails'
 
 group :development do
   gem 'awesome_print'
-#  gem 'thin'
+  gem 'thin'
   gem 'quiet_assets'
 end
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
 end
+
+gem 'unicorn'

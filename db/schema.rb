@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(:version => 20121221122732) do
     t.string   "local_code"
     t.string   "home_link",         :limit => 1000
     t.string   "wikipedia_link",    :limit => 1000
-    t.string   "keywords"
+    t.text     "keywords"
     t.datetime "created_at",                                                        :null => false
     t.datetime "updated_at",                                                        :null => false
   end
