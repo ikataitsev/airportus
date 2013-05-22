@@ -1,7 +1,7 @@
 development: &developement
   adapter: postgresql
   encoding: unicode
-  database: airportus_developement
+  database: airportus_development
   pool: 5
   host: localhost
   port: 5432
@@ -15,7 +15,7 @@ production:
   pool: 5
   host: localhost
   port: 5432
-  username: ivan
+  username: postgres
   password:
 
 test:
